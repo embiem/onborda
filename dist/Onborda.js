@@ -62,20 +62,21 @@ const Onborda = ({ children, steps, shadowRgb = "0, 0, 0", shadowOpacity = "0.2"
                     // Determine if the element is within the viewport + offset
                     const isInViewportWithOffset = rect.top >= -offset && rect.bottom <= window.innerHeight + offset;
                     if (!isInView || !isInViewportWithOffset) {
-                        element.scrollIntoView({ behavior: "smooth", block: "center" });
+                        element.scrollIntoView({ behavior: "smooth", block: step.scrollAlignment || "center" });
                     }
                 }
             }
         }
     }, [currentStep, steps, isInView, offset, isOnbordaVisible]);
     useEffect(() => {
+        const step = steps[currentStep];
         if (elementToScroll && !isInView && isOnbordaVisible) {
             console.log("Onborda: Element to Scroll Changed");
             const rect = elementToScroll.getBoundingClientRect();
             const isAbove = rect.top < 0;
             elementToScroll.scrollIntoView({
                 behavior: "smooth",
-                block: isAbove ? "center" : "center",
+                block: step.scrollAlignment || "center",
                 inline: "center",
             });
         }
@@ -147,12 +148,13 @@ const Onborda = ({ children, steps, shadowRgb = "0, 0, 0", shadowOpacity = "0.2"
         }
     };
     const scrollToElement = (stepIndex) => {
-        const element = document.querySelector(steps[stepIndex].selector);
+        const step = steps[stepIndex];
+        const element = document.querySelector(step.selector);
         if (element) {
             const { top } = element.getBoundingClientRect();
             const isInViewport = top >= -offset && top <= window.innerHeight + offset;
             if (!isInViewport) {
-                element.scrollIntoView({ behavior: "smooth", block: "center" });
+                element.scrollIntoView({ behavior: "smooth", block: step.scrollAlignment || "center" });
             }
         }
     };

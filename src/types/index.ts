@@ -16,6 +16,7 @@ export interface Step {
   selector: string;
   // Options
   side?: "top" | "bottom" | "left" | "right";
+  scrollAlignment?: "start" | "center" | "end" | "nearest";
   showControls?: boolean;
   pointerPadding?: number;
   pointerRadius?: number;

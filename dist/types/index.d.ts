@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export interface OnbordaContextType {
     currentStep: number;
     setCurrentStep: (step: number, delay?: number) => void;
@@ -12,6 +11,7 @@ export interface Step {
     content: React.ReactNode;
     selector: string;
     side?: "top" | "bottom" | "left" | "right";
+    scrollAlignment?: "start" | "center" | "end" | "nearest";
     showControls?: boolean;
     pointerPadding?: number;
     pointerRadius?: number;
